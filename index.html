@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi PWA Policial</title> <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2196F3">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <header>
+        <h1>Mi Aplicación Policial</h1>
+        <nav>
+            <button class="nav-button active" data-target="home-section">Inicio</button>
+            <button class="nav-button" data-target="data-section">Base de Datos</button>
+            <button class="nav-button" data-target="pdf-section">Archivos PDF</button>
+            <button class="nav-button" data-target="phones-section">Teléfonos Útiles</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home-section" class="content-section active">
+            <h2>Noticias Policiales de la Zona (Rosario/Santa Fe)</h2>
+            <p>Aquí se mostrarán noticias relevantes de foros y medios locales.</p>
+            <div id="news-feed">
+                <div class="news-item">
+                    <h3>Noticia de Ejemplo 1</h3>
+                    <p>Breve descripción de la noticia. <a href="#" target="_blank">Leer más</a></p>
+                </div>
+                 <div class="news-item">
+                    <h3>Noticia de Ejemplo 2</h3>
+                    <p>Breve descripción de la noticia. <a href="#" target="_blank">Leer más</a></p>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">
+                <small>Para noticias actualizadas, es posible que necesitemos un servidor más avanzado.</small>
+            </p>
+        </section>
+
+        <section id="data-section" class="content-section">
+            <h2>Base de Datos de Personas</h2>
+            
+            <h3>Buscar Persona</h3>
+            <input type="text" id="search-input" placeholder="Buscar por DNI, Patente, Nombre..." onkeyup="searchPerson()"><br>
+            <div id="search-results">
+                </div>
+
+            <h3>Registrar Nueva Persona</h3>
+            <form id="person-form">
+                <input type="text" id="person-dni" placeholder="DNI" required><br>
+                <input type="text" id="person-patente" placeholder="Patente"><br>
+                <input type="text" id="person-name" placeholder="Nombre" required><br>
+                <input type="text" id="person-lastname" placeholder="Apellido" required><br>
+                <input type="text" id="person-address" placeholder="Dirección"><br>
+                <input type="text" id="person-phone" placeholder="Teléfono"><br>
+                <input type="number" id="person-age" placeholder="Edad"><br>
+                <textarea id="person-notes" placeholder="Notas adicionales"></textarea><br>
+                <button type="submit">Guardar Persona</button>
+            </form>
+        </section>
+
+        <section id="pdf-section" class="content-section">
+            <h2>Archivos y Documentos</h2>
+            <p>Aquí encontrarás documentos importantes como leyes, manuales y protocolos.</p>
+            <h3>Documentos Disponibles</h3>
+            <div id="pdf-list">
+                </div>
+        </section>
+
+        <section id="phones-section" class="content-section">
+            <h2>Teléfonos Útiles de Comisarías y Emergencias</h2>
+            <div id="phone-list">
+                </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
