@@ -1,6 +1,6 @@
 {
-    "name": "Mi Primera PWA",
-    "short_name": "MiPWA",
+    "name": "App policial 4",
+    "short_name": "APPpolicial",
     "description": "Una aplicación web progresiva de prueba",
     "start_url": "./",
     "display": "standalone",
