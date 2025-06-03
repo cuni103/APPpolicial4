@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App policial 4</title> <link rel="stylesheet" href="style.css">
+    <title>App policial 4</title> 
+    <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2196F3">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
@@ -28,7 +29,7 @@
                     <h3>Noticia de Ejemplo 1</h3>
                     <p>Breve descripción de la noticia. <a href="#" target="_blank">Leer más</a></p>
                 </div>
-                 <div class="news-item">
+                <div class="news-item">
                     <h3>Noticia de Ejemplo 2</h3>
                     <p>Breve descripción de la noticia. <a href="#" target="_blank">Leer más</a></p>
                 </div>
@@ -42,22 +43,44 @@
             <h2>Base de Datos de Personas</h2>
             
             <h3>Buscar Persona</h3>
-            <input type="text" id="search-input" placeholder="Buscar por DNI, Patente, Nombre..." onkeyup="searchPerson()"><br>
+            <input type="text" id="search-input" placeholder="Buscar por DNI, Patente, Nombre..."><br> 
             <div id="search-results">
                 </div>
 
             <h3>Registrar Nueva Persona</h3>
             <form id="person-form">
-                <input type="text" id="person-dni" placeholder="DNI" required><br>
-                <input type="text" id="person-patente" placeholder="Patente"><br>
-                <input type="text" id="person-name" placeholder="Nombre" required><br>
-                <input type="text" id="person-lastname" placeholder="Apellido" required><br>
-                <input type="text" id="person-address" placeholder="Dirección"><br>
-                <input type="text" id="person-phone" placeholder="Teléfono"><br>
-                <input type="number" id="person-age" placeholder="Edad"><br>
-                <textarea id="person-notes" placeholder="Notas adicionales"></textarea><br>
+                <label for="person-name">Nombre:</label>
+                <input type="text" id="person-name" placeholder="Nombre" required><br><br>
+
+                <label for="person-lastname">Apellido:</label>
+                <input type="text" id="person-lastname" placeholder="Apellido" required><br><br>
+
+                <label for="person-dni">DNI:</label>
+                <input type="text" id="person-dni" placeholder="DNI"><br><br>
+
+                <label for="person-address">Dirección:</label>
+                <input type="text" id="person-address" placeholder="Dirección"><br><br>
+
+                <label for="person-age">Edad:</label>
+                <input type="number" id="person-age" placeholder="Edad"><br><br>
+
+                <label for="person-phone">Teléfono:</label>
+                <input type="text" id="person-phone" placeholder="Teléfono"><br><br>
+
+                <label for="person-photo">Cargar Foto:</label>
+                <input type="file" id="person-photo" accept="image/*"><br><br>
+                <img id="preview-photo" src="#" alt="Vista previa de la foto" style="max-width: 150px; max-height: 150px; display: none;"><br><br>
+
+                <label for="person-notes">AGREGAR INFORMACION IMPORTANTE:</label>
+                <textarea id="person-notes" placeholder="Notas adicionales"></textarea><br><br>
+                
                 <button type="submit">Guardar Persona</button>
             </form>
+            
+            <h3>Todas las Personas Registradas</h3>
+            <div id="all-persons-list">
+                <p>No hay personas registradas aún.</p>
+            </div>
         </section>
 
         <section id="pdf-section" class="content-section">
@@ -65,16 +88,37 @@
             <p>Aquí encontrarás documentos importantes como leyes, manuales y protocolos.</p>
             <h3>Documentos Disponibles</h3>
             <div id="pdf-list">
-                </div>
+                <p><a href="PDF APPS/CODIGO DE CONVIVENCIA LEY 12.774.pdf" target="_blank">Código de Convivencia Ley 12.774</a></p>
+                <p><a href="PDF APPS/LEY_24.449_NACIONAL_DE_TRANSITO_TEXTO_ACTUALIZADO.pdf" target="_blank">Ley 24.449 Nacional de Tránsito</a></p>
+            </div>
         </section>
 
         <section id="phones-section" class="content-section">
             <h2>Teléfonos Útiles de Comisarías y Emergencias</h2>
             <div id="phone-list">
-                </div>
+                <ul>
+                    <li>Policía de Emergencia: <strong>911</strong></li>
+                    <li>Comisaría Local: (ej. 03471) 42-XXXX</li>
+                    <li>Bomberos: 03471-XXXXXX</li>
+                    </ul>
+            </div>
         </section>
     </main>
 
     <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Ajusta esta ruta si has renombrado tu repositorio a /APPpolicial/
+                navigator.serviceWorker.register('/MiPrimeraPWA/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registrado con éxito:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Fallo el registro del Service Worker:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
