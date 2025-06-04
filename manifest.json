@@ -1,21 +1,21 @@
 {
-    "name": "APPpolicial",
-    "short_name": "APPpolicial",
-    "description": "Aplicación Policial para gestión de datos y recursos.",
-    "start_url": "/APPpolicial/index.html",
-    "display": "standalone",
-    "background_color": "#f0f2f5",
-    "theme_color": "#2196F3",
-    "icons": [
-      {
-        "src": "icons/icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "icons/icon-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ]
-  }
+  "name": "APPpolicial",
+  "short_name": "APPpolicial",
+  "description": "Aplicación Policial para gestión de datos y recursos.",
+  "start_url": "/APPpolicial4/index.html",  
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "theme_color": "#2196F3",
+  "icons": [
+    {
+      "src": "/APPpolicial4/icons/icon-192x192.png", 
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/APPpolicial4/icons/icon-512x512.png", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

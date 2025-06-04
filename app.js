@@ -332,8 +332,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pdfItem = document.createElement('div');
                 pdfItem.classList.add('pdf-item');
                 // La ruta a tus PDFs debe ser correcta. Si están en 'PDF APPS/', usa esa ruta.
+                // Asegúrate que la ruta sea absoluta desde la raíz del repositorio.
                 pdfItem.innerHTML = `
-                    <a href="PDF APPS/${pdf.file}" target="_blank">${pdf.name}</a>
+                    <a href="/APPpolicial4/PDF APPS/${pdf.file}" target="_blank">${pdf.name}</a>
                 `;
                 topicDiv.appendChild(pdfItem);
             });
@@ -373,6 +374,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Lógica de navegación de secciones (adaptada a los nuevos data-target y IDs) ---
+    // Itera sobre cada botón de navegación para añadir un "escuchador de eventos"
+    navButtons.forEach(button => {
+        button.addEventListener('click', async () => { // Hacemos async para IndexedDB
+            // Remueve la clase 'active' (que marca el botón como seleccionado) de todos los botones
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            // Añade la clase 'active' al botón que fue clicado
+            button.classList.add('active');
+
+            // Remueve la clase 'active' (que muestra la sección) de todas las secciones de contenido
+            contentSections.forEach(section => section.classList.remove('active'));
+
+            // Obtiene el ID de la sección objetivo desde el atributo 'data-target' del botón
+            const targetId = button.dataset.target;
+            // Añade la clase 'active' a la sección objetivo para mostrarla
+            document.getElementById(targetId).classList.add('active');
+
+            // Lógica condicional para cargar datos cuando se cambia a ciertas secciones
+            if (targetId === 'phones-section') {
+                loadImportantPhones(); // Carga los teléfonos importantes si se va a esa sección
+            } else if (targetId === 'data-section') {
+                // Si la sección es la de Base de Datos, aseguramos que la DB esté abierta
+                // y luego mostramos todas las personas.
+                await openDB(); 
+                const allPersons = await getPersonas();
+                displayPersonas(allPersonsListDiv, allPersons); // Mostrar todas las personas al entrar en la sección de BD
+                searchInput.value = ''; // Limpiar buscador al entrar
+                searchResultsDiv.innerHTML = ''; // Limpiar resultados de búsqueda
+                allPersonsListDiv.style.display = 'block'; // Asegurarse de que la lista completa sea visible
+            } else if (targetId === 'pdf-section') {
+                renderPreloadedPdfs(); // Carga los PDFs si se va a esa sección
+            }
+            // Para 'home-section' no se necesita lógica adicional aquí si el contenido es estático
+        });
+    });
+
+
     // --- Inicialización al cargar la PWA ---
     // Abre la base de datos IndexedDB al inicio.
     openDB().then(() => {
@@ -387,10 +425,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Llama a estas funciones para que la información se muestre cuando la PWA se inicia
+    // (Esto es para asegurar que si se carga la página directamente en estas secciones,
+    // el contenido se muestre. La lógica de navegación también los llama).
     renderPreloadedPdfs(); // Muestra los PDFs pre-cargados
     loadImportantPhones(); // Muestra los teléfonos importantes
 
-    // --- Lógica de navegación de secciones (adaptada a los nuevos data-target y IDs) ---
     // Establece la sección de Inicio como activa por defecto al cargar la PWA
     document.getElementById('home-section').classList.add('active');
     // Marca el botón 'Inicio' como activo por defecto
